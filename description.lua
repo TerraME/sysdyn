@@ -1,0 +1,8 @@
+version = "0.1"
+license = "GPL"
+package = "sisdyn"
+title = "System Dynamics"
+date = "19 June 2015"
+authors = "Gilberto Camara and Pedro R. Andrade"
+contact = "pedro.andrade@inpe.br"
+content = "Implements a System Dynamics framework."
