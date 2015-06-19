@@ -9,30 +9,35 @@ function SysDynModel(data)
 		end
 	end)
 
-	if data.graphics then
-		data.view = {}
+    verify(data.graphics, "System Dynamics 'graphics' must be provided")
+    verify(data.changes, "System Dynamics 'changes()' must be provided")
 
-		if data.graphics.phasespace then data.view.phaseSpace = true end
-		if data.graphics.timeseries then data.view.timeSeries = true end
+	data.view = {}
 
-		forEachElement(data.graphics, function(graphic, value)
-			forEachElement(value, function(_, mvalue)
-				forEachElement(mvalue, function(_, mmvalue)
-					if not parameters[mmvalue] then
-						customError("Name '"..mmvalue.."' does not belong to the parameters.")
-					end
-				end)
+	if data.graphics.phasespace then data.view.phaseSpace = true end
+	if data.graphics.timeseries then data.view.timeSeries = true end
+	if data.graphics.cobweb     then data.view.cobweb     = true end
+
+	-- checkUnnecessaryArguments(data.graphics, {"timeseries", "phasespace", "cobweb"})
+
+	forEachElement(data.graphics, function(graphic, value)
+		forEachElement(value, function(_, mvalue)
+			forEachElement(mvalue, function(_, mmvalue)
+				if not parameters[mmvalue] then
+					customError("Name '"..mmvalue.."' does not belong to the parameters.")
+				end
 			end)
 		end)
-
-	end
+	end)
 
 	local graphics = data.graphics
 	data.graphics = nil
+
 	data.init = function(instance)
 		instance.timer = Timer{
 			Event{action = function()
 				instance:changes()
+				-- update the cobweb plot here?
 			end},
 			Event{time = 0, priority = "low", action = function()
 				instance:notify()
@@ -61,9 +66,12 @@ function SysDynModel(data)
 				}
 			end)
 		end
+
+		if instance.view.cobweb then
+			-- create cobweb Chart here
+		end
 	end
 
 	return Model(data)
 end
-
 
