@@ -1,6 +1,7 @@
 
-require("sysdyn")
+if not isLoaded("sysdyn") then
+	import("sysdyn")
+end
 
-m = PredatorPrey{}
+PredatorPrey:execute()
 
-m:execute()
