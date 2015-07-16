@@ -1,5 +1,17 @@
 
---- Template for Systems Dynamics Model
+--- Template for Systems Dynamics Model.
+-- @arg data.changes A function that describes how the system changes in each
+-- time step.
+-- @arg data.graphics A table with internal tables describing how the parameters
+-- of the model will be drawn in the screen. It can have three values:
+--
+-- @arg data.... Any other value that can be used as parameter for the Model.
+-- @usage Tube = SysDynModel{
+--     water = 20,
+--     changes = function(model)
+--         model.water = model.water - 1
+--     end
+-- }
 function SysDynModel(data)
 	local parameters = {}
 
@@ -39,7 +51,7 @@ function SysDynModel(data)
 				instance:changes()
 				-- update the cobweb plot here?
 			end},
-			Event{time = 0, priority = "low", action = function()
+			Event{start = 0, priority = "low", action = function()
 				instance:notify()
 			end}
 		}
