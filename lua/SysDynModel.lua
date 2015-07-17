@@ -10,7 +10,10 @@
 --     water = 20,
 --     changes = function(model)
 --         model.water = model.water - 1
---     end
+--     end,
+--     graphics = {
+--         timeseries = {{"pop"}},
+--     }
 -- }
 function SysDynModel(data)
 	local parameters = {}
