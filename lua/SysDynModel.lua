@@ -6,9 +6,12 @@
 -- of the model will be drawn in the screen. It can have three values:
 -- @tabular graphics
 -- Graphics  & Description \
--- "timeseries" & Draw a time series. \
--- "cobweb" &  Draw a cobweb plot. \
--- "phasespace" & Draw a phase state plot.\
+-- "timeseries" & A table with internal tables describing sets of attributes to be
+-- drawn with time as x axis. \
+-- "cobweb" &  Draw a cobweb plot. Not implemented yet. \
+-- "phasespace" & A table with internal tables with the attributes to be drawn
+-- as a phase space. The first attribute of every internal table will be used as
+-- x axis.
 -- @arg data.... Any other value that can be used as parameter for the Model.
 -- @usage Tube = SysDynModel{
 --     water = 20,
@@ -16,7 +19,7 @@
 --         model.water = model.water - 1
 --     end,
 --     graphics = {
---         timeseries = {{"pop"}},
+--         timeseries = {{"water"}},
 --     }
 -- }
 function SysDynModel(data)
