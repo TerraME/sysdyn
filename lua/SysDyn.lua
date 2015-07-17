@@ -4,7 +4,11 @@
 -- time step.
 -- @arg data.graphics A table with internal tables describing how the parameters
 -- of the model will be drawn in the screen. It can have three values:
---
+-- @tabular graphics
+-- Graphics  & Description \
+-- "timeseries" & Draw a time series. \
+-- "cobweb" &  Draw a cobweb plot. \
+-- "phasespace" & Draw a phase state plot.\
 -- @arg data.... Any other value that can be used as parameter for the Model.
 -- @usage Tube = SysDynModel{
 --     water = 20,
