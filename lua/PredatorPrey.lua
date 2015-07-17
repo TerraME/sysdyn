@@ -4,10 +4,12 @@
 -- @arg data.rabbits A number between 100 and 1000 with the initial number of rabbits.
 -- @arg data.preyGrowth A number between 0.01 and 1 with the probability of a prey
 -- to reproduce. The default value is 0.08.
--- @arg data.preyGrowth A number between 0.0001 and 0.01 with the probability of a prey
+-- @arg data.preyDeathPred A number between 0.0001 and 0.01 with the probability of a prey
 -- to be killed by a predator. The default value is 0.001.
--- @arg data.preyGrowth A number between 0.01 and 1 with the probability of a prey
--- to reproduce. The default value is 0.08.
+-- @arg data.predDeath A number between 0.001 and 0.5 with the probability of a predator
+-- to die. The default value is 0.02.
+-- @arg data.predGrowthKills A number between 0 and 0.01 with the increase in the size of the
+-- predator population per eack prey killed. The default value is 0.00002.
 -- @arg data.finalTime The final time of the simulation. The minimum value is 50 and the
 -- default value is 500.
 PredatorPrey = SysDynModel{
