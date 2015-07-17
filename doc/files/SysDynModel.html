@@ -184,6 +184,7 @@
 <span class="description">Template for Systems Dynamics Model.</span>
 
 
+	
 
 
 <!-- Function arguments -->
@@ -196,8 +197,70 @@
     
   
     <li>
-	  <strong>graphics</strong>: A table with internal tables describing how the parameters of the model will be drawn in the screen. It can have three values: 
+	  <strong>graphics</strong>: A table with internal tables describing how the parameters of the model will be drawn in the screen. It can have three values:
     </li> 
+    
+      </span>
+      <!-- Strategy of the argument -->
+       
+      <table class="arg_tab">
+	  
+      
+        <tr>
+        
+          
+            <th>
+            Graphics
+            </th>
+          
+          
+            <th>
+            Description
+            </th>
+          
+        
+        <tr>
+        
+          
+            <td>
+            "timeseries"
+            </td>
+          
+          
+            <td>
+            A table with internal tables describing sets of attributes to be drawn with time as x axis.
+            </td>
+          
+        
+        <tr>
+        
+          
+            <td>
+            "cobweb"
+            </td>
+          
+          
+            <td>
+            Draw a cobweb plot. Not implemented yet.
+            </td>
+          
+        
+        <tr>
+        
+          
+            <td>
+            "phasespace"
+            </td>
+          
+          
+            <td>
+            A table with internal tables with the attributes to be drawn as a phase space. The first attribute of every internal table will be used as x axis.
+            </td>
+          
+        
+        </tr>    
+      </table>
+      <span class="arg">
     
   
     <li>
@@ -218,7 +281,10 @@
     <span class="id">water</span> = <span class="number">20</span>,
     <span class="id">changes</span> = <span class="reserved">function</span>(<span class="id">model</span>)
         <span class="id">model</span>.<span class="id">water</span> = <span class="id">model</span>.<span class="id">water</span> - <span class="number">1</span>
-    <span class="reserved">end</span>
+    <span class="reserved">end</span>,
+    <span class="id">graphics</span> = {
+        <span class="id">timeseries</span> = {{<span class="string">"water"</span>}},
+    }
 }</code></pre>
 
 
