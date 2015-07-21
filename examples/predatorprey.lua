@@ -1,7 +1,5 @@
 
-if not isLoaded("sysdyn") then
-	import("sysdyn")
-end
+import("sysdyn")
 
 PredatorPrey:execute()
 

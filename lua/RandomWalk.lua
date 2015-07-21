@@ -6,11 +6,6 @@
 -- time step. The available values are 0, 0.3, 0.5 (default), 0.7, 0.95, and 1.
 -- @arg data.finalTime The final time of the simulation. It should be
 -- at least 10. The default value is 100.
--- @usage r = RandomWalk{
---     prob = 0.7
--- }
---
--- r:execute()
 RandomWalk = SysDynModel{
 	value = 0,   -- initial condition
 	prob  = Choice{0, 0.3, 0.5, 0.7, 0.95, 1, default = 0.5},
