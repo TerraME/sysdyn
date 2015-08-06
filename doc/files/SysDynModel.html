@@ -65,6 +65,8 @@
 	
 		
 	
+		
+	
 
 	
 		
@@ -93,6 +95,8 @@
 			
 		
 	
+		
+	
 
 	
 		<h1>Types</h1>
@@ -109,6 +113,7 @@
 					<li><strong>SysDynModel</strong></li>
 				
 			
+		
 		
 	</ul>
 
@@ -131,10 +136,13 @@
 	
 		
 	
+		
+	
 
 	
 
 	<ul>
+		
 		
 		
 		
@@ -155,6 +163,9 @@
 
 
 <!-- Data -->
+
+
+<!-- Font -->
 
 
 
@@ -193,6 +204,11 @@
 
     <li>
 	  <strong>changes</strong>: A function that describes how the system changes in each time step.
+    </li> 
+    
+  
+    <li>
+	  <strong>deltaTime</strong>: A numeric value with the period to execute the changes of the model. The default value is one.
     </li> 
     
   
@@ -254,13 +270,18 @@
           
           
             <td>
-            A table with internal tables with the attributes to be drawn as a phase space. The first attribute of every internal table will be used as x axis.
+            A table with internal tables with the attributes to be drawn as a phase space. The first attribute of every internal table will be used as
             </td>
           
         
         </tr>    
       </table>
       <span class="arg">
+    
+  
+    <li>
+	  <strong>updateTime</strong>: A numeric value with the period to update the charts. The default value is one. x axis.
+    </li> 
     
   
     <li>
