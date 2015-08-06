@@ -30,6 +30,10 @@ end
 -- "cobweb" &  Draw a cobweb plot. Not implemented yet. \
 -- "phasespace" & A table with internal tables with the attributes to be drawn
 -- as a phase space. The first attribute of every internal table will be used as
+-- @arg data.deltaTime A numeric value with the period to execute the changes of
+-- the model. The default value is one.
+-- @arg data.updateTime A numeric value with the period to update the charts.
+-- The default value is one.
 -- x axis.
 -- @arg data.... Any other value that can be used as parameter for the Model.
 -- @usage Tube = SysDynModel{
@@ -46,6 +50,9 @@ function SysDynModel(data)
 	verify(data.changes, "System Dynamics 'changes()' must be provided")
 
 	consistencyCheck(data)
+
+	defaultTableValue(data, "deltaTime", 1)
+	defaultTableValue(data, "updateTime", 1)
 
 	data.view = {}
 
