@@ -67,6 +67,9 @@ function SysDynModel(data)
 			customError("Invalid name for graphics: "..idx..".")
 		end 
 	end)
+    data.start = data.init
+
+    if not data.start then data.start = function() end end
 
 	local graphics = data.graphics
 	data.graphics = nil
@@ -76,6 +79,10 @@ function SysDynModel(data)
 		if instance.updateTime == 1 then instance.updateTime = nil end
 
 		instance.timer = Timer{
+            Event{priority = "high", action = function (ev)
+                instance:start()
+                return false
+            end},    
 			Event{period = instance.deltaTime, action = function (ev)
 				instance:changes(ev:getTime())
 				-- update the cobweb plot here?
