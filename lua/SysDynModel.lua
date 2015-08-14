@@ -60,6 +60,14 @@ function SysDynModel(data)
 	if data.graphics.timeseries then data.view.timeSeries = true end
 	if data.graphics.cobweb     then data.view.cobweb     = true end
 
+	forEachElement(data.graphics, function(idx)
+		if type(idx) ~= "string" then
+			customError("Argument 'graphics' should have only string indexes, got "..type(idx)..".")
+		elseif not belong(idx, {"phasespace", "timeseries", "cobweb"}) then
+			customError("Invalid name for graphics: "..idx..".")
+		end 
+	end)
+
 	local graphics = data.graphics
 	data.graphics = nil
 
