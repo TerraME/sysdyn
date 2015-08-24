@@ -1,4 +1,4 @@
-version = "0.2"
+version = "0.3"
 license = "GPL"
 package = "sysdyn"
 title = "System Dynamics"

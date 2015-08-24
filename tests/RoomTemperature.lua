@@ -6,7 +6,7 @@ return{
 		local r = RoomTemperature{}
 		r:execute()
 
-		unitTest:assertEquals(r.temperature1, 20, 0.01)
+		unitTest:assertEquals(r.inside, 11.37, 0.01)
 	end,
 }
 
