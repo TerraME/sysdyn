@@ -12,6 +12,7 @@
 -- predator population per eack prey killed. The default value is 0.00002.
 -- @arg data.finalTime The final time of the simulation. The minimum value is 50 and the
 -- default value is 500.
+-- @image predator-prey.bmp
 PredatorPrey = SysDynModel{
 	wolves          = Choice{min = 10,                 default = 40},
 	rabbits         = Choice{min = 100,                default = 1000},

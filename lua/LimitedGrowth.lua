@@ -4,6 +4,7 @@
 -- @arg data.rate The growth rate of the population.
 -- @arg data.capacity The maximum amount of individuals.
 -- @arg data.finalTime The number of simulation steps.
+-- @image limited-growth.bmp
 LimitedGrowth = SysDynModel{ 
 	pop    = 300,
 	rate   = 0.105,

@@ -2,7 +2,6 @@ if not isLoaded("sci") then
 	import("sci") -- SKIP
 end
 
-
 -- relation btw 
 waterSurface = Spline { 
 	points = {  {x = 0, y = 0}, {x = 1000, y = 24.7}, 
@@ -52,6 +51,7 @@ end
 -- @arg data.otherIn Other inputs of water to the lake in KAF/year.
 -- @arg data.evapRate The evaporation rate in feet/year.
 -- @arg data.otherOut Other output of water from the lake in KAF/year.
+-- @image monolake.bmp
 MonoLake = SysDynModel {
 	waterInLake   = 2228.0,  -- kiloAcre * feet 
 	level         = 6224,

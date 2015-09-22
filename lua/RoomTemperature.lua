@@ -5,6 +5,7 @@
 -- @arg data.temperature3 The initial temperature of the third room. The default value is 5.
 -- @arg data.exterior The temperature outside the rooms. The default value is 20.
 -- @arg data.finalTime The final time of the simulation. The default value is 100.
+-- @image room-temperature.bmp
 RoomTemperature = SysDynModel{ 
 	tempSet     = 20.0,
 	inside      = 15.0, 

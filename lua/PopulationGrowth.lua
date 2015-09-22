@@ -9,6 +9,7 @@
 -- @arg data.growthChange The change of the growth rate. The growth
 -- rate is multiplied by this value in each time step.
 -- @arg data.finalTime The final time of the simulation. The default value is 100.
+-- @image population-growth.bmp
 PopulationGrowth = SysDynModel{
 	population1 = 60,
 	population2 = 20,

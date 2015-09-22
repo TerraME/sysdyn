@@ -94,7 +94,7 @@ function SysDynModel(data)
 
 		if instance.view.timeSeries then
 			forEachElement(graphics.timeseries, function(idx, value)
-				Chart{
+				instance.ts = Chart{
 					target = instance,
 					select = value
 				}
@@ -106,7 +106,7 @@ function SysDynModel(data)
 				local xaxis = value[1]
 				table.remove(value, 1)
 	
-				Chart{
+				instance.ps = Chart{
 					target = instance,
 					select = value,
 					xAxis = xaxis,
