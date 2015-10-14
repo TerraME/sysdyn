@@ -36,8 +36,11 @@ end
 -- The default value is one.
 -- x axis.
 -- @arg data.... Any other value that can be used as parameter for the Model.
--- @usage Tube = SysDynModel{
+-- @usage import("sysdyn")
+--
+-- tube = SysDynModel{
 --     water = 20,
+--     finalTime = 20,
 --     changes = function(model)
 --         model.water = model.water - 1
 --     end,
@@ -45,6 +48,8 @@ end
 --         timeseries = {{"water"}},
 --     }
 -- }
+--
+-- tube:execute()
 function SysDynModel(data)
 	verify(data.graphics, "System Dynamics 'graphics' must be provided")
 	verify(data.changes, "System Dynamics 'changes()' must be provided")
@@ -58,7 +63,7 @@ function SysDynModel(data)
 
 	if data.graphics.phasespace then data.view.phaseSpace = true end
 	if data.graphics.timeseries then data.view.timeSeries = true end
-	if data.graphics.cobweb     then data.view.cobweb     = true end
+	if data.graphics.cobweb     then data.view.cobWeb     = true end
 
 	forEachElement(data.graphics, function(idx)
 		if type(idx) ~= "string" then

@@ -9,6 +9,12 @@
 -- @arg data.growthChange The change of the growth rate. The growth
 -- rate is multiplied by this value in each time step.
 -- @arg data.finalTime The final time of the simulation. The default value is 100.
+-- @arg data.deltaTime A numeric value with the period to execute the changes of
+-- the model. The default value is one.
+-- @arg data.updateTime A numeric value with the period to update the charts.
+-- The default value is one.
+-- @arg data.view A table with a boolean element timeSeries (default true) indicating whether
+-- a time series chart should be drawn.
 -- @image population-growth.bmp
 PopulationGrowth = SysDynModel{
 	population1 = 60,

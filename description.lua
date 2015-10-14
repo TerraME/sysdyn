@@ -1,6 +1,7 @@
-version = "0.3"
+version = "0.4"
 license = "GPL"
 package = "sysdyn"
+depends = "terrame (>= 1.6), sci (>= 0.1)"
 title = "System Dynamics"
 authors = "Gilberto Camara and Pedro R. Andrade"
 contact = "pedro.andrade@inpe.br"

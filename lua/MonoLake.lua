@@ -51,11 +51,17 @@ end
 -- @arg data.otherIn Other inputs of water to the lake in KAF/year.
 -- @arg data.evapRate The evaporation rate in feet/year.
 -- @arg data.otherOut Other output of water from the lake in KAF/year.
+-- @arg data.deltaTime A numeric value with the period to execute the changes of
+-- the model. The default value is one.
+-- @arg data.updateTime A numeric value with the period to update the charts.
+-- The default value is one.
+-- @arg data.finalTime The final time of the simulation. The default value is 50.
+-- @arg data.view A table with a boolean element timeSeries (default true) indicating whether
+-- a time series chart should be drawn.
 -- @image monolake.bmp
 MonoLake = SysDynModel {
 	waterInLake   = 2228.0,  -- kiloAcre * feet 
 	level         = 6224,
-	surf          = 0.0,
 	-- input
 	precRate      = 0.67,    -- feet/year
 	runoff        = 150,     -- KAF/year
@@ -74,6 +80,6 @@ MonoLake = SysDynModel {
 		model.level = waterElevation:value(model.waterInLake)
 	end,
 
-	graphics = { timeseries =  { {"level"}, {"waterInLake" }}}
+	graphics = {timeseries = {{"level"}, {"waterInLake"}}}
 }
 
