@@ -10,17 +10,23 @@
 -- @arg data.view A table with two boolean elements, timeSeries and cobWeb (default true),
 -- indicating whether a time series charts should be drawn.
 -- @image chaotic-growth.bmp
-ChaoticGrowth = SysDynModel{
+ChaoticGrowth = Model{
 	pop       = 0.10,
 	rate      = 4.0,
 	finalTime = 300,
-	changes = function(model)
-		model.pop = model.rate * model.pop * (1 - model.pop)
-		return model.pop
-	end,
-	graphics = {
-		timeseries = {{"pop"}},
-		cobweb = {{"pop"}}
-	}
+	init = function(model)
+		model.step = function()
+			model.pop = model.rate * model.pop * (1 - model.pop)
+		end
+
+		model.timer = Timer{
+			Event{action = model}
+		}
+
+		model.chart = Chart{
+			target = model,
+			select = "pop"
+		}
+	end
 }
 

@@ -3,21 +3,33 @@ if not isLoaded("sci") then
 end
 
 -- relation btw 
-waterSurface = Spline { 
-	points = {  {x = 0, y = 0}, {x = 1000, y = 24.7}, 
-	            {x = 2000, y = 35.3}, {x = 3000, y = 48.6}, 
-	            {x = 4000, y = 54.3}, {x = 5000, y = 57.2}, 
-	            {x = 6000, y = 61.6}, {x = 7000, y = 66.0}, 
-	            {x = 8000, y = 69.9} },
+waterSurface = Spline{ 
+	points = {
+		{x = 0,    y = 0},
+		{x = 1000, y = 24.7}, 
+		{x = 2000, y = 35.3},
+		{x = 3000, y = 48.6}, 
+		{x = 4000, y = 54.3},
+		{x = 5000, y = 57.2}, 
+		{x = 6000, y = 61.6},
+		{x = 7000, y = 66.0}, 
+		{x = 8000, y = 69.9}
+	},
 	steps = 1000
 } 
 
-waterElevation = Spline {
-	points = {{x = 0, y = 6224}, {x = 1000, y = 6335}, 
-	          {x = 2000, y = 6369}, {x = 3000, y = 6392}, 
-	          {x = 4000, y = 6412}, {x = 5000, y = 6430}, 
-	          {x = 6000, y = 6447}, {x = 7000, y = 6463}, 
-	          {x = 8000, y = 6477} },
+waterElevation = Spline{
+	points = {
+		{x = 0,    y = 6224},
+		{x = 1000, y = 6335}, 
+		{x = 2000, y = 6369},
+		{x = 3000, y = 6392}, 
+		{x = 4000, y = 6412},
+		{x = 5000, y = 6430}, 
+		{x = 6000, y = 6447},
+		{x = 7000, y = 6463}, 
+		{x = 8000, y = 6477}
+	},
 	steps = 1000
 }
 
@@ -51,15 +63,11 @@ end
 -- @arg data.otherIn Other inputs of water to the lake in KAF/year.
 -- @arg data.evapRate The evaporation rate in feet/year.
 -- @arg data.otherOut Other output of water from the lake in KAF/year.
--- @arg data.deltaTime A numeric value with the period to execute the changes of
--- the model. The default value is one.
--- @arg data.updateTime A numeric value with the period to update the charts.
--- The default value is one.
 -- @arg data.finalTime The final time of the simulation. The default value is 50.
 -- @arg data.view A table with a boolean element timeSeries (default true) indicating whether
 -- a time series chart should be drawn.
 -- @image monolake.bmp
-MonoLake = SysDynModel {
+MonoLake = Model{
 	waterInLake   = 2228.0,  -- kiloAcre * feet 
 	level         = 6224,
 	-- input
@@ -74,12 +82,27 @@ MonoLake = SysDynModel {
 
 	finalTime     = 50,
 
-	changes = function(model, time)
-		model.waterInLake = model.waterInLake 
-			+ input(model, time) - output(model, time)
-		model.level = waterElevation:value(model.waterInLake)
-	end,
+	init = function(model)
+		model.step = function(event)
+			local time = event:getTime()
+			model.waterInLake = model.waterInLake 
+				+ input(model, time) - output(model, time)
+			model.level = waterElevation:value(model.waterInLake)
+		end
 
-	graphics = {timeseries = {{"level"}, {"waterInLake"}}}
+		model.timer = Timer{
+			Event{action = model}
+		}
+
+		model.chart1 = Chart{
+			target = model,
+			select = "level"
+		}
+
+		model.chart2 = Chart{
+			target = model,
+			select = "waterInLake"
+		}
+	end
 }
 

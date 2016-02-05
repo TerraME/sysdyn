@@ -10,16 +10,10 @@
 -- to die. The default value is 0.02.
 -- @arg data.predGrowthKills A number between 0 and 0.01 with the increase in the size of the
 -- predator population per eack prey killed. The default value is 0.00002.
--- @arg data.deltaTime A numeric value with the period to execute the changes of
--- the model. The default value is one.
--- @arg data.updateTime A numeric value with the period to update the charts.
--- The default value is one.
 -- @arg data.finalTime The final time of the simulation. The minimum value is 50 and the
 -- default value is 500.
--- @arg data.view A table with two boolean elements, timeSeries and phaseSpace (default true),
--- indicating whether a time series charts should be drawn.
 -- @image predator-prey.bmp
-PredatorPrey = SysDynModel{
+PredatorPrey = Model{
 	wolves          = Choice{min = 10,                 default = 40},
 	rabbits         = Choice{min = 100,                default = 1000},
 	preyGrowth      = Choice{min = 0.01,   max = 1,    default = 0.08},
@@ -27,16 +21,29 @@ PredatorPrey = SysDynModel{
 	predDeath       = Choice{min = 0.001,  max = 0.5,  default = 0.02},
 	predGrowthKills = Choice{min = 0,      max = 0.01, default = 0.00002},
 	finalTime       = Choice{min = 50,                 default = 500},
-	changes = function(model)
-		model.rabbits = model.rabbits + model.preyGrowth * model.rabbits
-		                - model.preyDeathPred * model.rabbits * model.wolves
+	init = function(model)
+		model.step = function()
+			model.rabbits = model.rabbits + model.preyGrowth * model.rabbits
+			                - model.preyDeathPred * model.rabbits * model.wolves
 
-		model.wolves = model.wolves - model.predDeath * model.wolves
-		               + model.predGrowthKills * model.rabbits * model.wolves
-	end,
-	graphics = {
-		timeseries = {{"rabbits", "wolves"}},
-		phasespace = {{"rabbits", "wolves"}}
-	}
+			model.wolves = model.wolves - model.predDeath * model.wolves
+			               + model.predGrowthKills * model.rabbits * model.wolves
+		end
+
+		model.timer = Timer{
+			Event{action = model}
+		}
+
+		model.chart1 = Chart{
+			target = model,
+			select = {"rabbits", "wolves"}
+		}
+	
+		model.chart2 = Chart{
+			target = model,
+			select = "rabbits",
+			xAxis = "rabbits"
+		}
+	end
 }
 
