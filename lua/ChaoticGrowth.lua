@@ -1,4 +1,3 @@
-
 --- A Model that describes a chaotic population growth.
 -- @arg data.pop The initial population. The default value is 0.1.
 -- @arg data.rate The rate that multiplies the population size in each time step. The degault value is 4.

@@ -1,4 +1,3 @@
-
 --- Model that implements predatory-prey dynamics.
 -- @arg data.wolves A number between 10 and 40 with the initial number of wolfes.
 -- @arg data.rabbits A number between 100 and 1000 with the initial number of rabbits.
@@ -41,7 +40,7 @@ PredatorPrey = Model{
 	
 		model.chart2 = Chart{
 			target = model,
-			select = "rabbits",
+			select = "wolves",
 			xAxis = "rabbits"
 		}
 	end

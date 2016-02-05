@@ -1,4 +1,3 @@
-
 --- Simple random walk model, where a given value can be added by one
 -- or subtracted by one randomly.
 -- @arg data.value The initial value. The default value is zero.
@@ -13,17 +12,27 @@
 -- @arg data.view A table with a boolean element timeSeries (default true) indicating whether
 -- a time series chart should be drawn.
 -- @image random-walk.bmp
-RandomWalk = SysDynModel{
-	value = 0,   -- initial condition
+RandomWalk = Model{
+	value = 0,
 	prob  = Choice{0, 0.3, 0.5, 0.7, 0.95, 1, default = 0.5},
 	finalTime = Choice{min = 10, default = 100},
-	changes = function (model)
-		if  Random():number(0, 1) <= model.prob then
-			model.value = model.value + 1
-		else
-			model.value = model.value - 1
+	init = function(model)
+		model.step = function()
+			if Random():number(0, 1) <= model.prob then
+				model.value = model.value + 1
+			else
+				model.value = model.value - 1
+			end
 		end
-	end,
-	graphics = { timeseries = {{"value"}} }
+
+		model.timer = Timer{
+			Event{action = model}
+		}
+
+		model.chart = Chart{
+			target = model,
+			select = "value"
+		}
+	end
 }
 

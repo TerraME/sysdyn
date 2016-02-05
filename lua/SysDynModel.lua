@@ -1,4 +1,3 @@
-
 local function consistencyCheck(data)
 	local parameters = {}
 	forEachElement(data, function(idx, _, mtype)

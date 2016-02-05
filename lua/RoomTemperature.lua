@@ -1,4 +1,3 @@
-
 --- Simple model that simulates the temperature of three rooms.
 -- @arg data.temperature1 The initial temperature of the first room. The default value is 80.
 -- @arg data.temperature2 The initial temperature of the second room. The default value is 20.

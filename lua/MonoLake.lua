@@ -3,7 +3,7 @@ if not isLoaded("sci") then
 end
 
 -- relation btw 
-waterSurface = Spline{ 
+local waterSurface = Spline{ 
 	points = {
 		{x = 0,    y = 0},
 		{x = 1000, y = 24.7}, 
@@ -18,7 +18,7 @@ waterSurface = Spline{
 	steps = 1000
 } 
 
-waterElevation = Spline{
+local waterElevation = Spline{
 	points = {
 		{x = 0,    y = 6224},
 		{x = 1000, y = 6335}, 
@@ -83,7 +83,7 @@ MonoLake = Model{
 	finalTime     = 50,
 
 	init = function(model)
-		model.step = function(event)
+		model.step = function(model, event)
 			local time = event:getTime()
 			model.waterInLake = model.waterInLake 
 				+ input(model, time) - output(model, time)

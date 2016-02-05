@@ -1,4 +1,3 @@
-
 --- A model to show homeostasis taking place.
 -- @arg data.stock The initial stock. The default value is 0.
 -- @arg data.gain The fixed increment in the stock in each time step. The default value is 2.0.
