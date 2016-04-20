@@ -1,5 +1,6 @@
 files = {
     "SysDynModel.lua",
+	"Daisyworld.lua",
 	"PredatorPrey.lua",
 	"RandomWalk.lua",
 	"ChaoticGrowth.lua",

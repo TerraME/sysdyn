@@ -16,22 +16,22 @@ RandomWalk = Model{
 	value = 0,
 	prob  = Choice{0, 0.3, 0.5, 0.7, 0.95, 1, default = 0.5},
 	finalTime = Choice{min = 10, default = 100},
-	init = function(model)
-		model.step = function()
-			if Random():number(0, 1) <= model.prob then
-				model.value = model.value + 1
-			else
-				model.value = model.value - 1
-			end
+	execute = function(model)
+		if Random():number(0, 1) <= model.prob then
+			model.value = model.value + 1
+		else
+			model.value = model.value - 1
 		end
-
-		model.timer = Timer{
-			Event{action = model}
-		}
-
+	end,
+	init = function(model)
 		model.chart = Chart{
 			target = model,
 			select = "value"
+		}
+
+		model.timer = Timer{
+			Event{action = model},
+			Event{action = model.chart}
 		}
 	end
 }

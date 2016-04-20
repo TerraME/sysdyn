@@ -81,19 +81,13 @@ MonoLake = Model{
 	export        = Choice {min = 10, default = 100},
 
 	finalTime     = 50,
-
+	execute = function(model)
+		local time = event:getTime()
+		model.waterInLake = model.waterInLake 
+			+ input(model, time) - output(model, time)
+		model.level = waterElevation:value(model.waterInLake)	
+	end,
 	init = function(model)
-		model.step = function(model, event)
-			local time = event:getTime()
-			model.waterInLake = model.waterInLake 
-				+ input(model, time) - output(model, time)
-			model.level = waterElevation:value(model.waterInLake)
-		end
-
-		model.timer = Timer{
-			Event{action = model}
-		}
-
 		model.chart1 = Chart{
 			target = model,
 			select = "level"
@@ -102,6 +96,12 @@ MonoLake = Model{
 		model.chart2 = Chart{
 			target = model,
 			select = "waterInLake"
+		}
+
+		model.timer = Timer{
+			Event{action = model},
+			Event{action = model.chart1},
+			Event{action = model.chart2}
 		}
 	end
 }

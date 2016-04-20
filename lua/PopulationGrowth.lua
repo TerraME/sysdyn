@@ -11,19 +11,19 @@ PopulationGrowth = Model{
 	growth = 0.5,
 	growthChange = 0.8,
 	finalTime = 100,
+	execute = function(model)
+		model.population = model.population * (1 + model.growth)
+		model.growth = model.growth * model.growthChange
+	end,
 	init = function(model)
-		model.step = function(model)
-			model.population = model.population * (1 + model.growth)
-			model.growth = model.growth * model.growthChange
-		end
-
-		model.timer = Timer{
-			Event{action = model}
-		}
-
 		model.chart = Chart{
 			target = model,
 			select = "population"
+		}
+
+		model.timer = Timer{
+			Event{action = model},
+			Event{action = model.chart}
 		}
 	end
 }

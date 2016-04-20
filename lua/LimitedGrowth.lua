@@ -11,18 +11,18 @@ LimitedGrowth = Model{
 	rate   = 0.105,
 	capacity = 20000,
 	finalTime = 100,
+	execute = function(model)
+		model.pop = model.pop + model.pop * model.rate * (1 - model.pop / model.capacity)
+	end,
 	init = function(model)
-		model.step = function()
-			model.pop = model.pop + model.pop * model.rate * (1 - model.pop / model.capacity)
-		end
-
-		model.timer = Timer{
-			Event{action = model}
-		}
-
 		model.chart = Chart{
 			target = model,
 			select = "pop"
+		}
+
+		model.timer = Timer{
+			Event{action = model},
+			Event{action = model.chart}
 		}
 	end
 }

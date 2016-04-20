@@ -4,18 +4,17 @@
 -- @arg data.rate The rate that multiplies the stock in each time step. The default value is -0.4.
 -- @arg data.finalTime The final time of the simulation. The default value is 30.
 -- @image homeostasis.bmp
-Homeostasis = Model{
-	stock = Choice{0.0, 2.0, 4.0, 10.0, 100.0},
-	gain = 2.0,
-	rate = -0.4,
-	finalTime = 30,
+Tube = Model{
+	water = 20,
+	flow = 1,
+	finalTime = 20,
 	execute = function(model)
-		model.stock = model.stock + model.gain + model.rate * model.stock
+		model.water = model.water - model.flow
 	end,
 	init = function (model)
 		model.chart = Chart{
 			target = model,
-			select = "stock"
+			select = "water"
 		}
 
 		model.timer = Timer{

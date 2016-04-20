@@ -20,19 +20,14 @@ PredatorPrey = Model{
 	predDeath       = Choice{min = 0.001,  max = 0.5,  default = 0.02},
 	predGrowthKills = Choice{min = 0,      max = 0.01, default = 0.00002},
 	finalTime       = Choice{min = 50,                 default = 500},
+	execute = function(model)
+		model.rabbits = model.rabbits + model.preyGrowth * model.rabbits
+		                - model.preyDeathPred * model.rabbits * model.wolves
+
+		model.wolves = model.wolves - model.predDeath * model.wolves
+		              + model.predGrowthKills * model.rabbits * model.wolves
+	end,
 	init = function(model)
-		model.step = function()
-			model.rabbits = model.rabbits + model.preyGrowth * model.rabbits
-			                - model.preyDeathPred * model.rabbits * model.wolves
-
-			model.wolves = model.wolves - model.predDeath * model.wolves
-			               + model.predGrowthKills * model.rabbits * model.wolves
-		end
-
-		model.timer = Timer{
-			Event{action = model}
-		}
-
 		model.chart1 = Chart{
 			target = model,
 			select = {"rabbits", "wolves"}
@@ -42,6 +37,12 @@ PredatorPrey = Model{
 			target = model,
 			select = "wolves",
 			xAxis = "rabbits"
+		}
+
+		model.timer = Timer{
+			Event{action = model},
+			Event{action = model.chart1},
+			Event{action = model.chart2}
 		}
 	end
 }

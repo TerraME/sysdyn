@@ -25,23 +25,23 @@ RoomTemperature = Model{
 	thermalInertia = 0.33, 
 	lossToOutside  = 0.30,
 	finalTime = 24,
+	execute = function(model)
+		local time = event:getTime()
+
+		model.outside = model.climate(time)
+		local inflow  = model.thermalInertia * (model.tempSet - model.inside)
+		local outflow = model.lossToOutside  * (model.inside - model.outside)
+		model.inside =  model.inside + inflow - outflow
+	end,
 	init = function(model)
-		model.step = function(model, event)
-			local time = event:getTime()
-
-			model.outside = model.climate(time)
-			local inflow  = model.thermalInertia * (model.tempSet - model.inside)
-			local outflow = model.lossToOutside  * (model.inside - model.outside)
-			model.inside =  model.inside + inflow - outflow
-		end
-
-		model.timer = Timer{
-			Event{action = model}
-		}
-
 		model.chart = Chart{
 			target = model,
 			select = {"inside", "tempSet", "outside"}
+		}
+
+		model.timer = Timer{
+			Event{action = model},
+			Event{action = model.chart}
 		}
 	end
 }

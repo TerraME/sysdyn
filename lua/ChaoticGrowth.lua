@@ -13,18 +13,18 @@ ChaoticGrowth = Model{
 	pop       = 0.10,
 	rate      = 4.0,
 	finalTime = 300,
+	execute = function(model)
+		model.pop = model.rate * model.pop * (1 - model.pop)
+	end,
 	init = function(model)
-		model.step = function()
-			model.pop = model.rate * model.pop * (1 - model.pop)
-		end
-
-		model.timer = Timer{
-			Event{action = model}
-		}
-
 		model.chart = Chart{
 			target = model,
 			select = "pop"
+		}
+
+		model.timer = Timer{
+			Event{action = model},
+			Event{action = model.chart}
 		}
 	end
 }
