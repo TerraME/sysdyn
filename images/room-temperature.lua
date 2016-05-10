@@ -5,8 +5,8 @@ import("sysdyn")
 
 sa = RoomTemperature{}
 
-sa:execute()
+sa:run()
 
-sa.ts:save("room-temperature.bmp")
+sa.chart:save("room-temperature.bmp")
 clean()
 

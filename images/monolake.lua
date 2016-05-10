@@ -5,8 +5,8 @@ import("sysdyn")
 
 sa = MonoLake{}
 
-sa:execute()
+sa:run()
 
-sa.ts:save("monolake.bmp")
+sa.chart1:save("monolake.bmp")
 clean()
 

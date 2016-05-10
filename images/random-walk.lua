@@ -5,8 +5,8 @@ import("sysdyn")
 
 sa = RandomWalk{finalTime = 40}
 
-sa:execute()
+sa:run()
 
-sa.ts:save("random-walk.bmp")
+sa.chart:save("random-walk.bmp")
 clean()
 

@@ -4,9 +4,10 @@
 return{
 	RoomTemperature = function(unitTest)
 		local r = RoomTemperature{}
-		r:execute()
+		r:run()
 
 		unitTest:assertEquals(r.inside, 11.37, 0.01)
+		unitTest:assertSnapshot(r.chart, "room-temperature.png")
 	end,
 }
 

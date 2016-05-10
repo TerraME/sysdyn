@@ -5,8 +5,8 @@ import("sysdyn")
 
 sa = ChaoticGrowth{}
 
-sa:execute()
+sa:run()
 
-sa.ts:save("chaotic-growth.bmp")
+sa.chart:save("chaotic-growth.bmp")
 clean()
 

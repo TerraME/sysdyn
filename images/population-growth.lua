@@ -5,8 +5,8 @@ import("sysdyn")
 
 sa = PopulationGrowth{}
 
-sa:execute()
+sa:run()
 
-sa.ts:save("population-growth.bmp")
+sa.chart:save("population-growth.bmp")
 clean()
 

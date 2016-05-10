@@ -5,8 +5,8 @@ import("sysdyn")
 
 sa = Homeostasis{}
 
-sa:execute()
+sa:run()
 
-sa.ts:save("homeostasis.bmp")
+sa.chart:save("homeostasis.bmp")
 clean()
 

@@ -25,7 +25,7 @@ RoomTemperature = Model{
 	thermalInertia = 0.33, 
 	lossToOutside  = 0.30,
 	finalTime = 24,
-	execute = function(model)
+	execute = function(model, event)
 		local time = event:getTime()
 
 		model.outside = model.climate(time)

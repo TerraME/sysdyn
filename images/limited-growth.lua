@@ -5,8 +5,8 @@ import("sysdyn")
 
 sa = LimitedGrowth{}
 
-sa:execute()
+sa:run()
 
-sa.ts:save("limited-growth.bmp")
+sa.chart:save("limited-growth.bmp")
 clean()
 

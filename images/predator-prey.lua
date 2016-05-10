@@ -5,8 +5,8 @@ import("sysdyn")
 
 sa = PredatorPrey{}
 
-sa:execute()
+sa:run()
 
-sa.ps:save("predator-prey.bmp")
+sa.chart1:save("predator-prey.bmp")
 clean()
 

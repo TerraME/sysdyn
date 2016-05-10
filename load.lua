@@ -1,5 +1,4 @@
 files = {
-    "SysDynModel.lua",
 	"Daisyworld.lua",
 	"PredatorPrey.lua",
 	"RandomWalk.lua",
@@ -8,6 +7,7 @@ files = {
 	"PopulationGrowth.lua",
 	"Homeostasis.lua",
 	"RoomTemperature.lua",
+	"Tube.lua",
     "MonoLake.lua"
 }
 

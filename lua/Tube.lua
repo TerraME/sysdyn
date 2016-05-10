@@ -1,9 +1,8 @@
---- A model to show homeostasis taking place.
--- @arg data.stock The initial stock. The default value is 0.
--- @arg data.gain The fixed increment in the stock in each time step. The default value is 2.0.
--- @arg data.rate The rate that multiplies the stock in each time step. The default value is -0.4.
+--- A simple water in the tube model.
+-- @arg data.water The initial stock of water. The default value is 20.
+-- @arg data.flow The flow of water outside the tube each time step. The default is one.
 -- @arg data.finalTime The final time of the simulation. The default value is 30.
--- @image homeostasis.bmp
+-- @image tube.bmp
 Tube = Model{
 	water = 20,
 	flow = 1,

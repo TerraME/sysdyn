@@ -4,8 +4,9 @@
 return{
 	ChaoticGrowth = function(unitTest)
 		local c = ChaoticGrowth{finalTime = 50}
-		c:execute()
+		c:run()
 		unitTest:assertEquals(c.pop, 0.56, 0.1)
+		unitTest:assertSnapshot(c.chart, "chaotic-growth.png")
 	end,
 }
 

@@ -4,8 +4,9 @@
 return{
 	PopulationGrowth = function(unitTest)
 		local p = PopulationGrowth{}
-		p:execute()
+		p:run()
 		unitTest:assertEquals(p.growthChange, 0.8, 0.01)
+		unitTest:assertSnapshot(p.chart, "population-growth.png")
 	end,
 }
 

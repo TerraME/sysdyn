@@ -4,8 +4,9 @@
 return{
 	Homeostasis = function(unitTest)
 		local h = Homeostasis{}
-		h:execute()
+		h:run()
 		unitTest:assertEquals(h.stock, 5, 0.1)
+		unitTest:assertSnapshot(h.chart, "homeostasis.png")
 	end,
 }
 

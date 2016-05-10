@@ -4,9 +4,10 @@
 return{
 	RandomWalk = function(unitTest)
 		local r = RandomWalk{}
-		r:execute()
+		r:run()
 		
 		unitTest:assertEquals(r.value, 2)
+		unitTest:assertSnapshot(r.chart, "random-walk.png")
 	end,
 }
 

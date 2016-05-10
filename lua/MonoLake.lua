@@ -69,7 +69,7 @@ end
 -- @image monolake.bmp
 MonoLake = Model{
 	waterInLake   = 2228.0,  -- kiloAcre * feet 
-	level         = 6224,
+	level         = 6375,
 	-- input
 	precRate      = 0.67,    -- feet/year
 	runoff        = 150,     -- KAF/year
@@ -81,7 +81,7 @@ MonoLake = Model{
 	export        = Choice {min = 10, default = 100},
 
 	finalTime     = 50,
-	execute = function(model)
+	execute = function(model, event)
 		local time = event:getTime()
 		model.waterInLake = model.waterInLake 
 			+ input(model, time) - output(model, time)
