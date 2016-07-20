@@ -100,7 +100,6 @@ Daisyworld = Model{
 	blackArea            = 0.273, 
 	emptyArea            = 0.327,
 	planetAlbedo         = 0.532,
-	planetTemp           = 295.0, -- in K (corresponds to 22 C) 
 
 	-- params (fixed assumptions)
 	whiteAlbedo          = 0.75,
@@ -120,10 +119,12 @@ Daisyworld = Model{
 			target = model,
 			select = {"planetAlbedo"},
 		}
-
+        
+        model.aveTemp = calcTemp(model.sunLuminosity, model.planetAlbedo)
+                
 		model.chart3 = Chart{
 			target = model,
-			select = {"planetTemp"},
+			select = {"aveTemp"},
 		}
 
 		model.chart4 = Chart{
@@ -141,34 +142,33 @@ Daisyworld = Model{
 					model.emptyArea * model.soilAlbedo 
 
 				-- function that calculates the planet Temperature
-				model.aveTemp = calcTemp (model.sunLuminosity, model.planetAlbedo)
+				model.aveTemp = calcTemp(model.sunLuminosity, model.planetAlbedo)
 
 				-- temperature near he white daisies
-				model.tempNearWhite = tempNearDaisy (model.aveTemp, 
+				model.tempNearWhite = tempNearDaisy(model.aveTemp, 
 					model.planetAlbedo, model.whiteAlbedo)
 
 				-- indicated growth rate for the white daisies
-				model.indWhiteGrowthRate = daisyGrowthRate (model.tempNearWhite)
+				model.indWhiteGrowthRate = daisyGrowthRate(model.tempNearWhite)
 
 				-- actual growthRate is constained by the empty area of the planet
-				model.whiteGrowthRate = growthReduction 
-					(model.indWhiteGrowthRate, model.emptyArea)
+				model.whiteGrowthRate = growthReduction(model.indWhiteGrowthRate, model.emptyArea)
+
 				-- white area
 				model.whiteArea = model.whiteArea + model.whiteArea * 
 					(model.whiteGrowthRate - model.decayRate)
 
 				-- temperature near the black daisies
-				model.tempNearBlack = tempNearDaisy (model.aveTemp, model.planetAlbedo,
+				model.tempNearBlack = tempNearDaisy(model.aveTemp, model.planetAlbedo,
 					model.blackAlbedo)
 
 				-- indicated growth rate for the white daisies
-				model.indBlackGrowthRate = daisyGrowthRate (model.tempNearBlack)
+				model.indBlackGrowthRate = daisyGrowthRate(model.tempNearBlack)
 
 				-- actual growthRate is constained by the empty area of the planet
-
-				model.blackGrowthRate = growthReduction 
-					(model.indBlackGrowthRate, model.emptyArea)
-				-- white area
+				model.blackGrowthRate = growthReduction(model.indBlackGrowthRate, model.emptyArea)
+                
+				-- black area
 				model.blackArea = model.blackArea + model.blackArea * 
 					(model.blackGrowthRate - model.decayRate)
 
@@ -182,4 +182,3 @@ Daisyworld = Model{
 		}
 	end
 }
-
