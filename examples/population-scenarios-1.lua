@@ -5,14 +5,22 @@
 
 import("sysdyn")
 
-pg = PopulationGrowth{}
-
-pg:execute()
-
-pg2 = PopulationGrowth{
-	population = 20,
-	growth = 0.9
+env = Environment{
+	PopulationGrowth{},
+	PopulationGrowth{
+		population = 20,
+		growth = 0.9
+	}
 }
 
-pg2:execute()
+clean()
+
+chart = Chart{
+	target = env,
+	select = "population"
+}
+
+env:add(Event{action = chart})
+
+env:run()
 
