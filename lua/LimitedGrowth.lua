@@ -3,8 +3,6 @@
 -- @arg data.rate The growth rate of the population.
 -- @arg data.capacity The maximum amount of individuals.
 -- @arg data.finalTime The number of simulation steps.
--- @arg data.view A table with a boolean element timeSeries (default true) indicating whether
--- a time series chart should be drawn.
 -- @image limited-growth.bmp
 LimitedGrowth = Model{
 	pop    = 300,

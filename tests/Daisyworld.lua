@@ -6,7 +6,11 @@ return{
 		local model = Daisyworld{}
 
 		model:run()
-		unitTest:assertSnapshot(model.chart, "daisyworld.png")
+
+		unitTest:assertSnapshot(model.chart1, "Daisyworld-chart-1.bmp")
+		unitTest:assertSnapshot(model.chart2, "Daisyworld-chart-2.bmp")
+		unitTest:assertSnapshot(model.chart3, "Daisyworld-chart-3.bmp")
+		unitTest:assertSnapshot(model.chart4, "Daisyworld-chart-4.bmp")
 	end,
 }
 

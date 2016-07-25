@@ -1,4 +1,4 @@
-version = "0.6.1"
+version = "0.6.2"
 license = "GPL"
 package = "sysdyn"
 depends = "terrame (>= 2.0), sci (>= 0.3)"

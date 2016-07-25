@@ -43,6 +43,8 @@ PredatorPrey = Model{
 			xAxis = "prey"
 		}
 
+		if model.period == 1 then model.period = nil end
+
 		model.timer = Timer{
 			Event{action = model, period = model.period},
 			Event{action = model.chart1},

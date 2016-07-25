@@ -72,11 +72,15 @@ end
 -- white according to their reflectivity or albedo.
 -- @arg data.sunLuminosity Sun luminosity (this is the main variable of the model).
 -- Values beteween 0.70 and 1.6  support life in Daisyworld.
+-- @arg data.daisyArea The initial daisy area, which is the sum of white and
+-- black areas. The default value is 0.673.
 -- @arg data.planetArea The total area of the planet. The sum of the arguments
 -- whiteArea, blackArea, and emptyArea should be equals to this value. The default value is 1.
 -- @arg data.whiteArea The initial area of white daisies. The default value is 0.4.
 -- @arg data.blackArea The initial area of black daisies. The default value is 0.273.
 -- @arg data.emptyArea The initial empty area. The default value is 0.327.
+-- @arg data.planetAlbedo The initial planet albedo, which is a weighted sum
+-- based on the areas of daisies and their albedos.
 -- @arg data.whiteAlbedo The albedo of white area. The default value is 0.75.
 -- @arg data.blackAlbedo The albedo of black area. The default value is 0.25.
 -- @arg data.soilAlbedo The albedo of empty area. The default value is 0.5.

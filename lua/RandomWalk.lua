@@ -5,12 +5,6 @@
 -- time step. The available values are 0, 0.3, 0.5 (default), 0.7, 0.95, and 1.
 -- @arg data.finalTime The final time of the simulation. It should be
 -- at least 10. The default value is 100.
--- @arg data.deltaTime A numeric value with the period to execute the changes of
--- the model. The default value is one.
--- @arg data.updateTime A numeric value with the period to update the charts.
--- The default value is one.
--- @arg data.view A table with a boolean element timeSeries (default true) indicating whether
--- a time series chart should be drawn.
 -- @image random-walk.bmp
 RandomWalk = Model{
 	value = 0,

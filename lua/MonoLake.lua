@@ -64,8 +64,6 @@ end
 -- @arg data.evapRate The evaporation rate in feet/year.
 -- @arg data.otherOut Other output of water from the lake in KAF/year.
 -- @arg data.finalTime The final time of the simulation. The default value is 50.
--- @arg data.view A table with a boolean element timeSeries (default true) indicating whether
--- a time series chart should be drawn.
 -- @image monolake.bmp
 MonoLake = Model{
 	waterInLake   = 2228.0,  -- kiloAcre * feet 
