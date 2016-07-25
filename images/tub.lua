@@ -1,7 +1,7 @@
 
 import("sysdyn")
 
-t = Tube{}
+t = Tub{}
 
 t:run()
 
