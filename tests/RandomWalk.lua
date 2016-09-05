@@ -7,7 +7,7 @@ return{
 		r:run()
 		
 		unitTest:assertEquals(r.value, 2)
-		unitTest:assertSnapshot(r.chart, "random-walk.png")
+		unitTest:assertSnapshot(r.chart, "random-walk.png", 0.05)
 	end,
 }
 

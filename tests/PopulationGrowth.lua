@@ -6,7 +6,7 @@ return{
 		local p = PopulationGrowth{}
 		p:run()
 		unitTest:assertEquals(p.growthChange, 1, 0.01)
-		unitTest:assertSnapshot(p.chart, "population-growth.png")
+		unitTest:assertSnapshot(p.chart, "population-growth.png", 0.05)
 	end,
 }
 

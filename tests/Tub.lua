@@ -7,7 +7,7 @@ return{
 
 		model:run()
 
-		unitTest:assertSnapshot(model.chart, "tub.png")
+		unitTest:assertSnapshot(model.chart, "tub.png", 0.05)
 	end,
 }
 
