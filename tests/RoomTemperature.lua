@@ -7,7 +7,7 @@ return{
 		r:run()
 
 		unitTest:assertEquals(r.inside, 11.37, 0.01)
-		unitTest:assertSnapshot(r.chart, "room-temperature.png", 0.05)
+		unitTest:assertSnapshot(r.chart, "room-temperature.png", 0.1)
 	end,
 }
 

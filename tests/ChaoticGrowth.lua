@@ -6,7 +6,7 @@ return{
 		local c = ChaoticGrowth{finalTime = 50}
 		c:run()
 		unitTest:assertEquals(c.pop, 0.56, 0.1)
-		unitTest:assertSnapshot(c.chart, "chaotic-growth.png", 0.05)
+		unitTest:assertSnapshot(c.chart, "chaotic-growth.png", 0.2)
 	end,
 }
 
