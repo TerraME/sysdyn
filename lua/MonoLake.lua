@@ -41,11 +41,11 @@ local function evaporation(model)
 	return model.evapRate *  waterSurface:value(model.waterInLake)
 end
 
-local function input(model, time)
+local function input(model)
 	return precipitation(model) + model.runoff + model.otherIn
 end
 
-local function output(model, time)
+local function output(model)
 	return evaporation(model) + model.export + model.otherOut
 end
 

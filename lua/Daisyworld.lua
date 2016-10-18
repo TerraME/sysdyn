@@ -137,9 +137,7 @@ Daisyworld = Model{
 		}
 
 		model.timer = Timer{
-			Event{action = function(event)
-				local time = event:getTime()
-
+			Event{action = function()
 				-- gets the average albedo of the planet
 				model.planetAlbedo = model.whiteArea * model.whiteAlbedo + 
 					model.blackArea * model.blackAlbedo +

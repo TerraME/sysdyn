@@ -7,7 +7,7 @@ Coffee = Model{
 	temperature     = 80,
 	roomTemperature = 20, 
 	finalTime       = 20,
-	execute = function(model, event)
+	execute = function(model)
 		local difference = model.temperature - model.roomTemperature
 		model.temperature =  model.temperature - difference * 0.1
 	end,
