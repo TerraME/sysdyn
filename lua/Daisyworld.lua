@@ -1,10 +1,7 @@
 
---[[
-Daisy growth rate function is a function of temperature. Maximum growth 
-occurs at 22.5 degrees Celsius, and daisies grow from a minimum of 5 C to 
-a maximum of 40 C.
---]]
-
+-- Daisy growth rate function is a function of temperature. Maximum growth 
+-- occurs at 22.5 degrees Celsius, and daisies grow from a minimum of 5 C to 
+-- a maximum of 40 C.
 local function daisyGrowthRate(tempK) -- daisyGrowthRate as function of temperature.
 	local gr = 0.0
 	local temp = tempK - 273
@@ -14,19 +11,13 @@ local function daisyGrowthRate(tempK) -- daisyGrowthRate as function of temperat
 	return gr
 end
 
---[[ 
-Calculates the average planet temperature using Boltzmann's law 
-
-"The amount of thermal radiation emitted increases rapidly and the principal frequency of the radiation becomes higher with increasing temperatures" -- 
-
-TempK^4 = average solar flux * luminosity (1 - albedo)
-
- Watson and Lovelock used 3668 watts per square meter as the solar flux,
- which is much higher than the average solar flux incident on the Earth today, 
- because the Earth has a relatively low planetary albedo and 
- a significant greenhouse effect. 
-]]
-
+-- Calculates the average planet temperature using Boltzmann's law 
+-- "The amount of thermal radiation emitted increases rapidly and the principal frequency of the radiation becomes higher with increasing temperatures"
+-- TempK^4 = average solar flux * luminosity (1 - albedo)
+-- Watson and Lovelock used 3668 watts per square meter as the solar flux,
+-- which is much higher than the average solar flux incident on the Earth today, 
+-- because the Earth has a relatively low planetary albedo and 
+-- a significant greenhouse effect.
 local SIGMA = 5.67E-08    -- Joules / per sec * square meters * TempK^^4 -- Stephen Boltzmann constant
 local SOLAR_FLUX = 3668   -- Watts/square meter
 
@@ -35,16 +26,13 @@ local function calcTemp(lum, albedo)
 	return tempK 
 end
 
---[[
-Calculates the temperatures near the daisies
-
-The local temperatures Tw and Tb are defined by making a simplifying assumption about 
-the heat transfer: a linearization of a diffusion term. 
-A parameter q is defined as the heat transfer coefficient, 
-thereby defining the local temperatures as
-
-TempK^4 (daisy) = q (planet_albedo - daisy_albedo) + tempK^4 (planet)
---]]
+-- Calculates the temperatures near the daisies
+--
+-- The local temperatures Tw and Tb are defined by making a simplifying assumption about 
+-- the heat transfer: a linearization of a diffusion term. 
+-- A parameter q is defined as the heat transfer coefficient, 
+-- thereby defining the local temperatures as
+-- TempK^4 (daisy) = q (planet_albedo - daisy_albedo) + tempK^4 (planet)
 
 local HEAT_TRANSFER_COEF = 2.06E09  -- Kelvins^4  -- used by Watson and Lovelock
 
@@ -54,10 +42,7 @@ local function tempNearDaisy(planet_temp, planet_albedo, daisy_albedo)
 	return temp_daisy
 end
 
---[[
 -- actual growthRate is constained by the empty area of the planet 
-
---]]
 local function growthReduction(baseRate, emptyArea)
 	local newRate = baseRate * emptyArea
 	return newRate
