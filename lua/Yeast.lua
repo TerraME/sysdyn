@@ -20,8 +20,6 @@ Yeast = Model{
 
 		model.timer = Timer{
 			Event{action = function(event)
-				local time = event:getTime()
-
 				model.cells = model.cells + model.cells * model.rate * (1 - model.cells / model.capacity)
 
 				if model.cells > model.capacity then
