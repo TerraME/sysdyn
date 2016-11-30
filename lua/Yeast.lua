@@ -8,7 +8,7 @@
 Yeast = Model{
 	cells     = 9.6,
 	capacity  = 665.0,
-	rate      = Choice{min = 0, max = 2.5, default = 1.1},
+	rate      = Choice{min = 0, max = 3.5, default = 1.1},
 	finalTime = 9,
 	init = function(model)
 		model.chart = Chart{
@@ -16,13 +16,18 @@ Yeast = Model{
 			select = {"cells"}
 		}
 
-		model.finalCells = {model.cells}
+		model.finalCells = {[0] = model.cells}
 
 		model.timer = Timer{
 			Event{action = function(event)
 				local time = event:getTime()
 
 				model.cells = model.cells + model.cells * model.rate * (1 - model.cells / model.capacity)
+
+				if model.cells > model.capacity then
+					model.cells = model.capacity
+				end
+
 				table.insert(model.finalCells, model.cells)
 			end},
 			Event{action = model.chart}
