@@ -4,6 +4,7 @@
 -- @arg data.rate The growth rate of the cells. The default value is 1.1.
 -- @arg data.finalTime The final simulation time. The default value is 9.
 -- @output finalCells A vector with the quantity of cells in each time step.
+-- @image yeast.bmp
 Yeast = Model{
 	cells     = 9.6,
 	capacity  = 665.0,
