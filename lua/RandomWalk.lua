@@ -10,6 +10,7 @@ RandomWalk = Model{
 	value = 0,
 	prob  = Choice{0, 0.3, 0.5, 0.7, 0.95, 1, default = 0.5},
 	finalTime = Choice{min = 10, default = 100},
+	random = true,
 	execute = function(model)
 		if Random():number(0, 1) <= model.prob then
 			model.value = model.value + 1

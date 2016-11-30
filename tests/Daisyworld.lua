@@ -3,7 +3,7 @@
 
 return{
 	Daisyworld = function(unitTest)
-		local model = Daisyworld{}
+		local model = Daisyworld{finalTime = 40}
 
 		model:run()
 
