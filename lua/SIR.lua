@@ -29,19 +29,19 @@ SIR = Model{
 			select = {"susceptible", "infected", "recovered"},
 			color = {"green", "red", "blue"}
 		}
-	
+
 		model.maxInfected = model.infected
 		model.finalInfected = {model.infected}
-	
+
 		model.timer = Timer{
 			Event{action = function()
-				local proportion = model.susceptible / 
+				local proportion = model.susceptible /
 					(model.susceptible + model.infected + model.recovered)
-				
+
 				local newInfected = model.infected * model.contacts * model.probability * proportion
-	
+
 				local newRecovered = model.infected / model.duration
-				 
+
 				model.susceptible = model.susceptible - newInfected
 				model.recovered = model.recovered + newRecovered
 				model.infected = model.infected + newInfected - newRecovered

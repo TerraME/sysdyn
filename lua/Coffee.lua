@@ -5,7 +5,7 @@
 -- @image coffee.bmp
 Coffee = Model{
 	temperature     = 80,
-	roomTemperature = 20, 
+	roomTemperature = 20,
 	finalTime       = 20,
 	execute = function(model)
 		local difference = model.temperature - model.roomTemperature

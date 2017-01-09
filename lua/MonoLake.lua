@@ -2,32 +2,32 @@ if not isLoaded("sci") then
 	import("sci") -- SKIP
 end
 
--- relation btw 
-local waterSurface = Spline{ 
+-- relation btw
+local waterSurface = Spline{
 	points = {
 		{x = 0,    y = 0},
-		{x = 1000, y = 24.7}, 
+		{x = 1000, y = 24.7},
 		{x = 2000, y = 35.3},
-		{x = 3000, y = 48.6}, 
+		{x = 3000, y = 48.6},
 		{x = 4000, y = 54.3},
-		{x = 5000, y = 57.2}, 
+		{x = 5000, y = 57.2},
 		{x = 6000, y = 61.6},
-		{x = 7000, y = 66.0}, 
+		{x = 7000, y = 66.0},
 		{x = 8000, y = 69.9}
 	},
 	steps = 1000
-} 
+}
 
 local waterElevation = Spline{
 	points = {
 		{x = 0,    y = 6224},
-		{x = 1000, y = 6335}, 
+		{x = 1000, y = 6335},
 		{x = 2000, y = 6369},
-		{x = 3000, y = 6392}, 
+		{x = 3000, y = 6392},
 		{x = 4000, y = 6412},
-		{x = 5000, y = 6430}, 
+		{x = 5000, y = 6430},
 		{x = 6000, y = 6447},
-		{x = 7000, y = 6463}, 
+		{x = 7000, y = 6463},
 		{x = 8000, y = 6477}
 	},
 	steps = 1000
@@ -66,14 +66,14 @@ end
 -- @arg data.finalTime The final time of the simulation. The default value is 50.
 -- @image monolake.bmp
 MonoLake = Model{
-	waterInLake   = 2228.0,  -- kiloAcre * feet 
+	waterInLake   = 2228.0,  -- kiloAcre * feet
 	level         = 6375,
 	-- input
 	precRate      = 0.67,    -- feet/year
 	runoff        = 150,     -- KAF/year
 	otherIn       = 47.6,    -- KAF/year
 
-	-- output 
+	-- output
 	evapRate      = 3.75,    -- feet/year
 	otherOut      = 33.6,    -- KAF/year
 	export        = Choice {min = 10, default = 100},
@@ -81,9 +81,9 @@ MonoLake = Model{
 	finalTime     = 50,
 	execute = function(model, event)
 		local time = event:getTime()
-		model.waterInLake = model.waterInLake 
+		model.waterInLake = model.waterInLake
 			+ input(model, time) - output(model, time)
-		model.level = waterElevation:value(model.waterInLake)	
+		model.level = waterElevation:value(model.waterInLake)
 	end,
 	init = function(model)
 		model.chart1 = Chart{

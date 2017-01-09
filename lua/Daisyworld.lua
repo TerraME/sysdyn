@@ -1,36 +1,36 @@
 
--- Daisy growth rate function is a function of temperature. Maximum growth 
--- occurs at 22.5 degrees Celsius, and daisies grow from a minimum of 5 C to 
+-- Daisy growth rate function is a function of temperature. Maximum growth
+-- occurs at 22.5 degrees Celsius, and daisies grow from a minimum of 5 C to
 -- a maximum of 40 C.
 local function daisyGrowthRate(tempK) -- daisyGrowthRate as function of temperature.
 	local gr = 0.0
 	local temp = tempK - 273
-	if temp > 5.0 and temp < 40.0 then 
+	if temp > 5.0 and temp < 40.0 then
 		gr = 1 - 0.003265 * (22.5 - temp)^2
-	end  
+	end
 	return gr
 end
 
--- Calculates the average planet temperature using Boltzmann's law 
+-- Calculates the average planet temperature using Boltzmann's law
 -- "The amount of thermal radiation emitted increases rapidly and the principal frequency of the radiation becomes higher with increasing temperatures"
 -- TempK^4 = average solar flux * luminosity (1 - albedo)
 -- Watson and Lovelock used 3668 watts per square meter as the solar flux,
--- which is much higher than the average solar flux incident on the Earth today, 
--- because the Earth has a relatively low planetary albedo and 
+-- which is much higher than the average solar flux incident on the Earth today,
+-- because the Earth has a relatively low planetary albedo and
 -- a significant greenhouse effect.
 local SIGMA = 5.67E-08    -- Joules / per sec * square meters * TempK^^4 -- Stephen Boltzmann constant
 local SOLAR_FLUX = 3668   -- Watts/square meter
 
 local function calcTemp(lum, albedo)
 	local tempK = (lum * SOLAR_FLUX * (1 - albedo) / (4*SIGMA)) ^0.25
-	return tempK 
+	return tempK
 end
 
 -- Calculates the temperatures near the daisies
 --
--- The local temperatures Tw and Tb are defined by making a simplifying assumption about 
--- the heat transfer: a linearization of a diffusion term. 
--- A parameter q is defined as the heat transfer coefficient, 
+-- The local temperatures Tw and Tb are defined by making a simplifying assumption about
+-- the heat transfer: a linearization of a diffusion term.
+-- A parameter q is defined as the heat transfer coefficient,
 -- thereby defining the local temperatures as
 -- TempK^4 (daisy) = q (planet_albedo - daisy_albedo) + tempK^4 (planet)
 
@@ -42,14 +42,14 @@ local function tempNearDaisy(planet_temp, planet_albedo, daisy_albedo)
 	return temp_daisy
 end
 
--- actual growthRate is constained by the empty area of the planet 
+-- actual growthRate is constained by the empty area of the planet
 local function growthReduction(baseRate, emptyArea)
 	local newRate = baseRate * emptyArea
 	return newRate
 end
 
 --- An implementation of the daisy world model.
--- Wood, A. J., G. J. Ackland, J. G. Dyke, H. T. P. Williams, and T. M. Lenton (2008), 
+-- Wood, A. J., G. J. Ackland, J. G. Dyke, H. T. P. Williams, and T. M. Lenton (2008),
 -- Daisyworld: A review, Rev. Geophys., 46.
 -- Daisyworld consists of two different types of daisy, which may be considered distinct species
 -- (because there is no possibility of mixed replication of the types) or, alternatively, as
@@ -75,25 +75,25 @@ end
 Daisyworld = Model{
 	-- sun luminosity (this is the main variable of the model)
 	-- values beteween 0.70 and 1.6  support life in Daisyworld
-	sunLuminosity         = 0.7, 
+	sunLuminosity         = 0.7,
 
-	-- variables 
-	-- default values are approximate equilibrium values 
+	-- variables
+	-- default values are approximate equilibrium values
 	-- when sun luminosity is equal to 1.0
 	-- hint: change the starting conditions when changing the sun luminosity
 	-- increase the white area for a strong sun
 	-- increase the black area for a faint sun
 	planetArea           = 1.0,
 	daisyArea            = 0.673,
-	whiteArea            = 0.40, 
-	blackArea            = 0.273, 
+	whiteArea            = 0.40,
+	blackArea            = 0.273,
 	emptyArea            = 0.327,
 	planetAlbedo         = 0.532,
 
 	-- params (fixed assumptions)
 	whiteAlbedo          = 0.75,
-	blackAlbedo          = 0.25, 
-	soilAlbedo           = 0.50, 
+	blackAlbedo          = 0.25,
+	soilAlbedo           = 0.50,
 	decayRate            = 0.3,
 
 	-- simulation time
@@ -108,9 +108,9 @@ Daisyworld = Model{
 			target = model,
 			select = {"planetAlbedo"},
 		}
-        
+
         model.aveTemp = calcTemp(model.sunLuminosity, model.planetAlbedo)
-                
+
 		model.chart3 = Chart{
 			target = model,
 			select = {"aveTemp"},
@@ -124,15 +124,15 @@ Daisyworld = Model{
 		model.timer = Timer{
 			Event{action = function()
 				-- gets the average albedo of the planet
-				model.planetAlbedo = model.whiteArea * model.whiteAlbedo + 
+				model.planetAlbedo = model.whiteArea * model.whiteAlbedo +
 					model.blackArea * model.blackAlbedo +
-					model.emptyArea * model.soilAlbedo 
+					model.emptyArea * model.soilAlbedo
 
 				-- function that calculates the planet Temperature
 				model.aveTemp = calcTemp(model.sunLuminosity, model.planetAlbedo)
 
 				-- temperature near he white daisies
-				model.tempNearWhite = tempNearDaisy(model.aveTemp, 
+				model.tempNearWhite = tempNearDaisy(model.aveTemp,
 					model.planetAlbedo, model.whiteAlbedo)
 
 				-- indicated growth rate for the white daisies
@@ -142,7 +142,7 @@ Daisyworld = Model{
 				model.whiteGrowthRate = growthReduction(model.indWhiteGrowthRate, model.emptyArea)
 
 				-- white area
-				model.whiteArea = model.whiteArea + model.whiteArea * 
+				model.whiteArea = model.whiteArea + model.whiteArea *
 					(model.whiteGrowthRate - model.decayRate)
 
 				-- temperature near the black daisies
@@ -154,9 +154,9 @@ Daisyworld = Model{
 
 				-- actual growthRate is constained by the empty area of the planet
 				model.blackGrowthRate = growthReduction(model.indBlackGrowthRate, model.emptyArea)
-                
+
 				-- black area
-				model.blackArea = model.blackArea + model.blackArea * 
+				model.blackArea = model.blackArea + model.blackArea *
 					(model.blackGrowthRate - model.decayRate)
 
 				model.emptyArea = model.planetArea - (model.blackArea + model.whiteArea)
