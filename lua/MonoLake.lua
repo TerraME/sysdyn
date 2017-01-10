@@ -81,8 +81,7 @@ MonoLake = Model{
 	finalTime     = 50,
 	execute = function(model, event)
 		local time = event:getTime()
-		model.waterInLake = model.waterInLake
-			+ input(model, time) - output(model, time)
+		model.waterInLake = model.waterInLake + input(model, time) - output(model, time)
 		model.level = waterElevation:value(model.waterInLake)
 	end,
 	init = function(model)
