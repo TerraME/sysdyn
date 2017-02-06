@@ -5,4 +5,10 @@ return {
 		width = 600, 
 		height = 500, 
 	}, 
+	[2] = {
+		x = 662, 
+		y = 101, 
+		width = 600, 
+		height = 500, 
+	}, 
 }
