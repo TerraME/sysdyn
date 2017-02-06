@@ -11,12 +11,12 @@
 -- @image room-temperature.bmp
 RoomTemperature = Model{
 	tempSet     = 20.0,
-	inside      = 15.0, 
+	inside      = 15.0,
 	outside     =  1.0,
 	climate     = function(hour)
 		return  15 - 0.1 * (hour - 12) ^ 2   -- varies btw 1 and 15 degrees
 	end,
-	thermalInertia = 0.33, 
+	thermalInertia = 0.33,
 	lossToOutside  = 0.30,
 	finalTime = 24,
 	execute = function(model, event)

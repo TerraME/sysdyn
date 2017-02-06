@@ -36,7 +36,7 @@ PredatorPrey = Model{
 			target = model,
 			select = {"prey", "predator"}
 		}
-	
+
 		model.chart2 = Chart{
 			target = model,
 			select = "predator",
