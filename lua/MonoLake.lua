@@ -4,7 +4,7 @@ end
 
 -- relation btw
 local waterSurface = Spline{
-	points = {
+	points = DataFrame{
 		{x = 0,    y = 0},
 		{x = 1000, y = 24.7},
 		{x = 2000, y = 35.3},
@@ -19,7 +19,7 @@ local waterSurface = Spline{
 }
 
 local waterElevation = Spline{
-	points = {
+	points = DataFrame{
 		{x = 0,    y = 6224},
 		{x = 1000, y = 6335},
 		{x = 2000, y = 6369},
