@@ -1,5 +1,5 @@
 --- Classic Lorenz Model to study chaos.
--- Lorenz, Edward Norton (1963). "Deterministic nonperiodic flow". 
+-- Lorenz, Edward Norton (1963). "Deterministic nonperiodic flow".
 -- Journal of the Atmospheric Sciences 20 (2): 130-141.
 -- The Lorenz system is a system of ordinary differential equations first studied by Edward Lorenz.
 -- It is notable for having chaotic solutions for certain parameter values and initial conditions.
