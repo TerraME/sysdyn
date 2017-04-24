@@ -7,8 +7,8 @@ return{
 
 		model:run()
 
-		unitTest:assertSnapshot(model.chart1, "Lorenz-chart-1.bmp")
-		unitTest:assertSnapshot(model.chart2, "Lorenz-chart-2.bmp")
+		unitTest:assertSnapshot(model.chart1, "Lorenz-chart-1.bmp", 0.1)
+		unitTest:assertSnapshot(model.chart2, "Lorenz-chart-2.bmp", 0.1)
 	end,
 }
 
