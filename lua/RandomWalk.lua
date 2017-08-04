@@ -19,7 +19,6 @@ RandomWalk = Model{
 		end
 	end,
 	init = function(model)
-		value2 = 5
 		model.chart = Chart{
 			target = model,
 			select = "value"
