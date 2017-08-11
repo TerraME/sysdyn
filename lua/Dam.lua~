@@ -25,10 +25,8 @@ Dam = Model{
 	execute = function(self) -- each time step
         local outFlow = self.population * self.consumePerPerson * self.kWh2cubicMeters -- update outflow
         self.water = self.water - outFlow -- update water
-		--local abc = 5
         if self.water <= 0 then -- water amount less than zero
 			self.water = 0
-            --print(self.timer:getTime())
         elseif self.water > 5e9 then -- water amount more than dam capacity
 			self.water = 5e9
 		end
@@ -47,7 +45,6 @@ Dam = Model{
 			target = self,
 			select = "water"
 		}
-
 		self.timer = Timer{
 			Event{action = self, priority = 'high'},
 			Event{period = 12, action = function()
