@@ -1,6 +1,8 @@
 --- A water in the dam model.
 -- @arg data.water The initial stock of water measured in m³. The initial value is 5,000,000,000.
 -- @arg data.inFlow1 The flow of water into the dam each first season. The default is 2e9.
+-- @arg data.inFlow2 The flow of water into the dam each second season. The default is 2e9.
+-- @arg data.currentYear Year 1995.
 -- @arg data.population The total amount of inhabitants. The default value is 1e5.
 -- @arg data.consumePerPerson The total amount of water per inhabitant. The default value is 10.
 -- @arg data.kWh2cubicMeters The total amount of kWh produced by cubic meters. The default value is 100.
@@ -21,12 +23,12 @@ Dam = Model{
     currentYear = 1950,
     finalTime = 1000,
 	execute = function(self) -- each time step
-        outFlow = self.population * self.consumePerPerson * self.kWh2cubicMeters -- update outflow
+        local outFlow = self.population * self.consumePerPerson * self.kWh2cubicMeters -- update outflow
         self.water = self.water - outFlow -- update water
 		--local abc = 5
         if self.water <= 0 then -- water amount less than zero
 			self.water = 0
-            print(self.timer:getTime())
+            --print(self.timer:getTime())
         elseif self.water > 5e9 then -- water amount more than dam capacity
 			self.water = 5e9
 		end
