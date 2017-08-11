@@ -1,6 +1,7 @@
 --- A water in the dam model.
 -- @arg data.water The initial stock of water measured in m³. The initial value is 5,000,000,000.
 -- @arg data.inFlow1 The flow of water into the dam each first season. The default is 2e9.
+-- @arg data.inFlow2 The flow of water into the dam each second season. The default is 1.5e9.
 -- @arg data.population The total amount of inhabitants. The default value is 1e5.
 -- @arg data.consumePerPerson The total amount of water per inhabitant. The default value is 10.
 -- @arg data.kWh2cubicMeters The total amount of kWh produced by cubic meters. The default value is 100.
@@ -8,6 +9,7 @@
 -- @arg data.countYear The flag in which defines whether count or not the years . The default value is false.
 -- @arg data.changedYear The year in which water values change. The default value is 1970.
 -- @arg data.finalTime The final time of the simulation in months. The default value is 1000.
+-- @arg data.currentYear The current year which water values change. The default value is 1950.
 Dam = Model{
     water = 5e9,
     inFlow1 = 2e9,
