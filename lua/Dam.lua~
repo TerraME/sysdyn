@@ -28,7 +28,7 @@ Dam = Model{
 		--local abc = 5
         if self.water <= 0 then -- water amount less than zero
 			self.water = 0
-            print(self.timer:getTime())
+            --print(self.timer:getTime())
         elseif self.water > 5e9 then -- water amount more than dam capacity
 			self.water = 5e9
 		end
