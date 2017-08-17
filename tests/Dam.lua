@@ -7,7 +7,7 @@ return{
 
 		model:run()
 
-		unitTest:assertSnapshot(model.chart, "Dam-chart-1.bmp". 0.15)
+		unitTest:assertSnapshot(model.chart, "Dam-chart-1.bmp", 0.15)
 
 		model = Dam{countYear = true}
 
