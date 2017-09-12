@@ -6,7 +6,7 @@ return{
 		local r = RandomWalk{}
 		r:run()
 
-		unitTest:assertEquals(r.value, 2)
+		unitTest:assertEquals(r.value, -4)
 		unitTest:assertSnapshot(r.chart, "random-walk.png", 0.1)
 	end,
 }
