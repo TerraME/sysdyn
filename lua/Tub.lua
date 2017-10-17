@@ -24,7 +24,7 @@ Tub = Model{
 
 		model.timer = Timer{
 			Event{action = model},
-			Event{start = 10, period = 10, action = function()
+			Event{period = 10, action = function()
 				model.water = model.water + model.inFlow
 			end},
 			Event{action = model.chart}

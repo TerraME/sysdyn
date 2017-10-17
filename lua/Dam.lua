@@ -51,13 +51,13 @@ Dam = Model{
 
 		self.timer = Timer{
 			Event{action = self, priority = 'high'},
-			Event{period = 12, action = function()
+			Event{start = 1, period = 12, action = function()
 				self.water = self.water + self.inFlow1 -- first season in first semester
 			end},
 			Event{start = 7, period = 12, action = function()
 				self.water = self.water + self.inFlow2 -- second season in second semester
 			end},
-			Event{start = 12, period = 12, action = function()
+			Event{period = 12, action = function()
 				self.consumePerPerson = self.consumePerPerson*(1 + self.growth) -- every year add 5%
 			end},
 			Event{action = self.chart}
