@@ -57,8 +57,6 @@ end
 -- white according to their reflectivity or albedo.
 -- @arg data.sunLuminosity Sun luminosity (this is the main variable of the model).
 -- Values beteween 0.70 and 1.6  support life in Daisyworld.
--- @arg data.daisyArea The initial daisy area, which is the sum of white and
--- black areas. The default value is 0.673.
 -- @arg data.planetArea The total area of the planet. The sum of the arguments
 -- whiteArea, blackArea, and emptyArea should be equals to this value. The default value is 1.
 -- @arg data.whiteArea The initial area of white daisies. The default value is 0.4.
@@ -82,7 +80,6 @@ Daisyworld = Model{
 	-- increase the white area for a strong sun
 	-- increase the black area for a faint sun
 	planetArea           = 1.0,
-	daisyArea            = 0.673,
 	whiteArea            = 0.40,
 	blackArea            = 0.273,
 	emptyArea            = 0.327,
@@ -100,6 +97,9 @@ Daisyworld = Model{
 			model.blackArea * model.blackAlbedo +
 			model.emptyArea * model.soilAlbedo
 	end,
+    daisyArea = function(model)
+        return model.blackArea + model.whiteArea
+    end,
 	init = function(model)
 		model.chart1 = Chart{
 			target = model,
@@ -125,9 +125,6 @@ Daisyworld = Model{
 
 		model.timer = Timer{
 			Event{action = function()
-				-- gets the average albedo of the planet
-
-
 				-- function that calculates the planet Temperature
 				model.aveTemp = calcTemp(model.sunLuminosity, model:planetAlbedo())
 
@@ -160,7 +157,6 @@ Daisyworld = Model{
 					(model.blackGrowthRate - model.decayRate)
 
 				model.emptyArea = model.planetArea - (model.blackArea + model.whiteArea)
-				model.daisyArea = model.blackArea + model.whiteArea
 			end},
 			Event{action = model.chart1},
 			Event{action = model.chart2},
