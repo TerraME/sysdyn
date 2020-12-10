@@ -57,15 +57,11 @@ end
 -- white according to their reflectivity or albedo.
 -- @arg data.sunLuminosity Sun luminosity (this is the main variable of the model).
 -- Values beteween 0.70 and 1.6  support life in Daisyworld.
--- @arg data.daisyArea The initial daisy area, which is the sum of white and
--- black areas. The default value is 0.673.
 -- @arg data.planetArea The total area of the planet. The sum of the arguments
 -- whiteArea, blackArea, and emptyArea should be equals to this value. The default value is 1.
 -- @arg data.whiteArea The initial area of white daisies. The default value is 0.4.
 -- @arg data.blackArea The initial area of black daisies. The default value is 0.273.
 -- @arg data.emptyArea The initial empty area. The default value is 0.327.
--- @arg data.planetAlbedo The initial planet albedo, which is a weighted sum
--- based on the areas of daisies and their albedos.
 -- @arg data.whiteAlbedo The albedo of white area. The default value is 0.75.
 -- @arg data.blackAlbedo The albedo of black area. The default value is 0.25.
 -- @arg data.soilAlbedo The albedo of empty area. The default value is 0.5.
@@ -84,11 +80,9 @@ Daisyworld = Model{
 	-- increase the white area for a strong sun
 	-- increase the black area for a faint sun
 	planetArea           = 1.0,
-	daisyArea            = 0.673,
 	whiteArea            = 0.40,
 	blackArea            = 0.273,
 	emptyArea            = 0.327,
-	planetAlbedo         = 0.532,
 
 	-- params (fixed assumptions)
 	whiteAlbedo          = 0.75,
@@ -98,6 +92,14 @@ Daisyworld = Model{
 
 	-- simulation time
 	finalTime  =  100,
+    planetAlbedo = function(model)
+		return model.whiteArea * model.whiteAlbedo +
+			model.blackArea * model.blackAlbedo +
+			model.emptyArea * model.soilAlbedo
+	end,
+    daisyArea = function(model)
+        return model.blackArea + model.whiteArea
+    end,
 	init = function(model)
 		model.chart1 = Chart{
 			target = model,
@@ -106,34 +108,29 @@ Daisyworld = Model{
 
 		model.chart2 = Chart{
 			target = model,
-			select = {"planetAlbedo"},
+			select = "planetAlbedo",
 		}
 
-        model.aveTemp = calcTemp(model.sunLuminosity, model.planetAlbedo)
+        model.aveTemp = calcTemp(model.sunLuminosity, model:planetAlbedo())
 
 		model.chart3 = Chart{
 			target = model,
-			select = {"aveTemp"},
+			select = "aveTemp",
 		}
 
 		model.chart4 = Chart{
 			target = model,
-			select = {"daisyArea"}
+			select = "daisyArea"
 		}
 
 		model.timer = Timer{
 			Event{action = function()
-				-- gets the average albedo of the planet
-				model.planetAlbedo = model.whiteArea * model.whiteAlbedo +
-					model.blackArea * model.blackAlbedo +
-					model.emptyArea * model.soilAlbedo
-
 				-- function that calculates the planet Temperature
-				model.aveTemp = calcTemp(model.sunLuminosity, model.planetAlbedo)
+				model.aveTemp = calcTemp(model.sunLuminosity, model:planetAlbedo())
 
 				-- temperature near he white daisies
 				model.tempNearWhite = tempNearDaisy(model.aveTemp,
-					model.planetAlbedo, model.whiteAlbedo)
+					model:planetAlbedo(), model.whiteAlbedo)
 
 				-- indicated growth rate for the white daisies
 				model.indWhiteGrowthRate = daisyGrowthRate(model.tempNearWhite)
@@ -146,8 +143,8 @@ Daisyworld = Model{
 					(model.whiteGrowthRate - model.decayRate)
 
 				-- temperature near the black daisies
-				model.tempNearBlack = tempNearDaisy(model.aveTemp, model.planetAlbedo,
-					model.blackAlbedo)
+				model.tempNearBlack = tempNearDaisy(model.aveTemp,
+                    model:planetAlbedo(), model.blackAlbedo)
 
 				-- indicated growth rate for the white daisies
 				model.indBlackGrowthRate = daisyGrowthRate(model.tempNearBlack)
@@ -160,7 +157,6 @@ Daisyworld = Model{
 					(model.blackGrowthRate - model.decayRate)
 
 				model.emptyArea = model.planetArea - (model.blackArea + model.whiteArea)
-				model.daisyArea = model.blackArea + model.whiteArea
 			end},
 			Event{action = model.chart1},
 			Event{action = model.chart2},
